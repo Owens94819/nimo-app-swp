@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script x-src="https://owens94819.github.io/src/nimo-app.js" type="text/javascript" charset="utf-8"></script>
+    <script src="nimo-app_v0.8.js" type="text/javascript" charset="utf-8"></script>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+     	<?nimo?tag=title
+      com:color+["current color: "] ? fallback = Loading...
+      ?>
+      <?nimo?tag=meta
+      com:color ? name = theme-color&
+      target = content
+      ?>
+      <style>
+      body,mark{
+        transition: 700ms;
+      }
+        mark{
+          padding: 10px 20px;
+          display:block;
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          font-size: 100%;
+          font-family: Arial;
+          color: rgba(0,0,0,0.468);
+          border:1px solid rgba(0,0,0,0.468);
+          border-radius: 100px;
+          transform: translate(-50%,-50%);
+          text-shadow: 0 0 80px rgb(255, 255, 255);
+          font-weight: 600;
+          user-select: none;
+          -webkit-user-select: none;
+          cursor: pointer;
+        }
+      </style>
+  <body app=nimo view="com:back?target=style.background">
+    <mark app=nimo view="com:color?target=style.background">
+      Nimo App V0.6
+    </mark>
+  </body>
+    <script type="text/javascript" charset="utf-8">
+      var app = new App('nimo');
+      app.config.delay = 0;
+
+      app.onload = function() {
+          run()
+          setInterval(run,1000)
+       }
+      
+      var math = function() {
+      return (Math.floor(Math.random()*255))
+      }
+      
+      var RC = function() {
+        return `rgb(${math()},${math()},${math()})`;
+      }
+      
+      var run = function() {
+        var it = (app.autoUpdateMode==true ? app.store.items.com : app.store.updateItem('com'));
+        it.color = RC();
+        it.back = RC();
+      };
+      
+      app.com({
+        color:'STRING:black',
+        back:"STRING:rgba(0,0,0,0.468)"
+       })  
+   </script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="nimo-app_v0.8.js" type="text/javascript" charset="utf-8"></script>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="" content="">
+    <title></title>
+    <style>body,html{margin: 0;padding: 5px;}</style>
+  </head>
+  <body>
+
+    <?nimo?tag=h1
+    com:index?>
+    <br>
+    <?nimo?tag=input
+    com:index
+    ?target = placeholder
+    &onkeyup = App('nimo').store.updateItem('com:index',this.value);
+    ?>
+
+   <script type="text/javascript" charset="utf-8">
+      var app;
+
+      app = new App('nimo');
+      if (!localStorage['nimo.V(1).nimo.app']) {
+       app.config.delay = 0;
+       app.com();
+      }else{
+       app.cache.upload(localStorage['nimo.V(1).nimo.app']);
+      }
+
+      app.onchange = function (e) {
+        
+       localStorage['nimo.V(1).nimo.app'] = app.cache.download();
+      }
+//ok
+    </script>
+  </body>
+</html>
